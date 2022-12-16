@@ -43,3 +43,5 @@ function solutionOne(path: string): number{
 }
 
 console.log(solutionOne('day1/test.txt'))
+console.log(solutionOne('day1/part1.txt'))
+
