@@ -30,3 +30,16 @@ function readInput(filepath: string): number[][]{
 }
 
 console.log(readInput('day1/test.txt'))
+
+function sumCalories(elves: number[][]): number{
+    return elves.map(
+        (elf: number[]) => 
+            elf.reduce((x,y) => x + y)
+    ).reduce((x,y) => Math.max(x,y))
+}
+
+function solutionOne(path: string): number{
+    return sumCalories(readInput(path))
+}
+
+console.log(solutionOne('day1/test.txt'))
