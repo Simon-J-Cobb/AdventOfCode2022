@@ -35,11 +35,9 @@ function letterToScore(char: string): number{
     }
 }
 
-console.log(allCommonLetters(readInput('resources/day3/test.txt')))
+function solutionOne(filepath:string): number {
+    return allCommonLetters(readInput('resources/day3/test.txt')).map(letterToScore).reduce((x,y) => x + y)
+}
 
-
-console.log(letterToScore('a'))
-console.log(letterToScore('z'))
-console.log(letterToScore('A'))
-console.log(letterToScore('Z'))
+console.log(solutionOne('resources/day3/test.txt'))
 
