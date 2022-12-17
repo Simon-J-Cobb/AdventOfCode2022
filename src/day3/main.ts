@@ -28,7 +28,18 @@ function allCommonLetters(rucksacks: rucksack[]){
 }
 
 function letterToScore(char: string): number{
-    return char.charCodeAt(0)
+    if(char == char.toUpperCase()){
+        return char.charCodeAt(0) - 38
+    } else{
+    return char.charCodeAt(0) - 96
+    }
 }
 
 console.log(allCommonLetters(readInput('resources/day3/test.txt')))
+
+
+console.log(letterToScore('a'))
+console.log(letterToScore('z'))
+console.log(letterToScore('A'))
+console.log(letterToScore('Z'))
+
