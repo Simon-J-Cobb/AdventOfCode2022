@@ -15,7 +15,7 @@ function readInput(filepath: string): strategy[]{
     return file.split(/\r?\n/).map((input) => {return {user: input.split(' ')[1] as userStrat , opponent: input.split(' ')[0] as opponentStrat}})
 }
 
-console.log(readInput('day2/test.txt'))
+console.log(readInput('resources/day2/test.txt'))
 
 function score(strategy: strategy): number{
     let score = 0
@@ -64,8 +64,8 @@ function solutionOne(filepath: string): number{
     return strategies.map(score).reduce((x,y) => x + y)
 }
 
-console.log(solutionOne('day2/test.txt'))
-console.log(solutionOne('day2/input.txt'))
+console.log(solutionOne('resources/day2/test.txt'))
+console.log(solutionOne('resources/day2/input.txt'))
 
 function scorePartTwo(strategy: strategy){
     let score = 0
@@ -114,5 +114,5 @@ function solutionTwo(filepath: string): number{
     return strategies.map(scorePartTwo).reduce((x,y) => x + y)
 }
 
-console.log(solutionTwo('day2/test.txt'))
-console.log(solutionTwo('day2/input.txt'))
+console.log(solutionTwo('resources/day2/test.txt'))
+console.log(solutionTwo('resources/day2/input.txt'))
