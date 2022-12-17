@@ -1,8 +1,8 @@
 import { readFileSync } from "fs";
 
-type userStrat = 'A' | 'B' | 'C';
+type opponentStrat = 'A' | 'B' | 'C';
 
-type opponentStrat = 'X' | 'Y' | 'Z';
+type userStrat = 'X' | 'Y' | 'Z';
 
 interface strategy {
     user: userStrat
@@ -12,47 +12,46 @@ interface strategy {
 
 function readInput(filepath: string): strategy[]{
     let file = readFileSync(filepath,'utf-8')
-    return file.split(/\r?\n/).map((input) => {return {user: input.split(' ')[0] as userStrat , opponent: input.split(' ')[1] as opponentStrat}})
+    return file.split(/\r?\n/).map((input) => {return {user: input.split(' ')[1] as userStrat , opponent: input.split(' ')[0] as opponentStrat}})
 }
 
 console.log(readInput('day2/test.txt'))
 
 function score(strategy: strategy): number{
     let score = 0
-    if(strategy.user == 'A'){
+    if(strategy.user == 'X'){
         score += 1
-        if(strategy.opponent == 'X'){
+        if(strategy.opponent == 'A'){
             score+=3
         }
-        if(strategy.opponent == 'Y'){
+        if(strategy.opponent == 'B'){
             score+=0
-
         }
-        if(strategy.opponent == 'Z'){
+        if(strategy.opponent == 'C'){
             score+=6
         }
     }
-    if(strategy.user == 'B'){
+    else if(strategy.user == 'Y'){
         score += 2
-        if(strategy.opponent == 'X'){
+        if(strategy.opponent == 'A'){
             score += 6
         }
-        if(strategy.opponent == 'Y'){
-            score +=3
+        if(strategy.opponent == 'B'){
+            score += 3
         }
-        if(strategy.opponent == 'Z'){
-            score +=6
-        }
-    }
-    if(strategy.user == 'C'){
-        score += 3
-        if(strategy.opponent == 'X'){
+        if(strategy.opponent == 'C'){
             score += 0
         }
-        if(strategy.opponent == 'Y'){
-            score +=6
+    }
+    else if(strategy.user == 'Z'){
+        score += 3
+        if(strategy.opponent == 'A'){
+            score += 0
         }
-        if(strategy.opponent == 'Z'){
+        if(strategy.opponent == 'B'){
+            score += 6
+        }
+        if(strategy.opponent == 'C'){
             score += 3
         }
     }
@@ -66,3 +65,4 @@ function solutionOne(filepath: string): number{
 }
 
 console.log(solutionOne('day2/test.txt'))
+console.log(solutionOne('day2/input.txt'))
