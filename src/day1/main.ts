@@ -32,7 +32,7 @@ function readInput(filepath: string): number[][]{
     return splitBasedOnValue(allCalories, -1)
 }
 
-console.log(readInput('day1/test.txt'))
+console.log(readInput('resources/day1/test.txt'))
 
 function sumCalories(elves: number[][]): number{
     return elves.map(
@@ -45,8 +45,8 @@ function solutionOne(path: string): number{
     return sumCalories(readInput(path))
 }
 
-console.log(solutionOne('day1/test.txt'))
-console.log(solutionOne('day1/part1.txt'))
+console.log(solutionOne('resources/day1/test.txt'))
+console.log(solutionOne('resources/day1/part1.txt'))
 
 function sumCaloriesPartTwo(elves: number[][]): number{
     return elves.map(
@@ -59,5 +59,7 @@ function solutionTwo(path: string): number{
     return sumCaloriesPartTwo(readInput(path))
 }
 
-console.log(solutionTwo('day1/test.txt'))
-console.log(solutionTwo('day1/part1.txt'))
+console.log(solutionTwo('resources/day1/test.txt'))
+console.log(solutionTwo('resources/day1/part1.txt'))
+
+console.log('hio')
