@@ -20,6 +20,9 @@ function splitBasedOnValue<Type>(values : Array<Type>, splitValue : Type): Array
         list.push(x)
         }
     })
+    if(list.length !=0){
+        listOfLists.push(list)
+    }
     return listOfLists
     }
 
@@ -45,3 +48,16 @@ function solutionOne(path: string): number{
 console.log(solutionOne('day1/test.txt'))
 console.log(solutionOne('day1/part1.txt'))
 
+function sumCaloriesPartTwo(elves: number[][]): number{
+    return elves.map(
+        (elf: number[]) => 
+            elf.reduce((x,y) => x + y)
+    ).sort((x,y) => y-x).slice(0,3).reduce((x,y) => x + y)
+}
+
+function solutionTwo(path: string): number{
+    return sumCaloriesPartTwo(readInput(path))
+}
+
+console.log(solutionTwo('day1/test.txt'))
+console.log(solutionTwo('day1/part1.txt'))
