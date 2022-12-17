@@ -12,3 +12,23 @@ function readInput(filepath: string): rucksack[]{
 }
 
 console.log(readInput('resources/day3/test.txt'))
+
+function commonLetter(rucksack: rucksack): string {
+    for(let itemOne of [...rucksack.compartmentOne]){
+        for(let itemTwo of [...rucksack.compartmentTwo]){
+            if(itemOne==itemTwo){
+                return itemOne
+            }
+    }
+}
+}
+
+function allCommonLetters(rucksacks: rucksack[]){
+    return rucksacks.map(commonLetter)
+}
+
+function letterToScore(char: string): number{
+    return char.charCodeAt(0)
+}
+
+console.log(allCommonLetters(readInput('resources/day3/test.txt')))
