@@ -66,3 +66,53 @@ function solutionOne(filepath: string): number{
 
 console.log(solutionOne('day2/test.txt'))
 console.log(solutionOne('day2/input.txt'))
+
+function scorePartTwo(strategy: strategy){
+    let score = 0
+    if(strategy.user == 'X'){
+        score += 0
+        if(strategy.opponent == 'A'){
+            score+=3
+        }
+        if(strategy.opponent == 'B'){
+            score+=1
+        }
+        if(strategy.opponent == 'C'){
+            score+=2
+        }
+    }
+    else if(strategy.user == 'Y'){
+        score += 3
+        if(strategy.opponent == 'A'){
+            score += 1
+        }
+        if(strategy.opponent == 'B'){
+            score += 2
+        }
+        if(strategy.opponent == 'C'){
+            score += 3
+        }
+    }
+    else if(strategy.user == 'Z'){
+        score += 6
+        if(strategy.opponent == 'A'){
+            score += 2
+        }
+        if(strategy.opponent == 'B'){
+            score += 3
+        }
+        if(strategy.opponent == 'C'){
+            score += 1
+        }
+    }
+    return score
+
+}
+
+function solutionTwo(filepath: string): number{
+    let strategies = readInput(filepath)
+    return strategies.map(scorePartTwo).reduce((x,y) => x + y)
+}
+
+console.log(solutionTwo('day2/test.txt'))
+console.log(solutionTwo('day2/input.txt'))
