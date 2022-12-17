@@ -33,7 +33,7 @@ function overlaps(pairs: number[][]){
     } else{
         if(pairs[1][0] <= pairs[0][0] && pairs[0][0] <= pairs[1][1]){
             return 1
-        } else if(pairs[1][0] <= pairs[0][1] && pairs[0][1] <= pairs[1][1]){
+        } else if(pairs[1][0] <= pairs[0][1] && pairs[0][0] <= pairs[1][1]){
             return 1
         } else {
             return 0
