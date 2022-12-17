@@ -21,6 +21,8 @@ function commonLetter(rucksack: rucksack): string {
             }
     }
 }
+return ''
+
 }
 
 function allCommonLetters(rucksacks: rucksack[]){
@@ -43,15 +45,15 @@ console.log(solutionOne('resources/day3/test.txt'))
 console.log(solutionOne('resources/day3/input.txt'))
 
 interface group{
-    elfOne: string[]
-    elfTwo: string[]
-    elfThree: string[]
+    elfOne: string
+    elfTwo: string
+    elfThree: string
 }
 
 function readInputTwo(filepath: string): group[]{
     let file = readFileSync(filepath,'utf-8')
     let elves =  file.split(/\r?\n/)
-    let groups = []
+    let groups: group[] = []
     const chunkSize = 3;
     for (let i = 0; i < elves.length; i += chunkSize) {
         const chunk = elves.slice(i, i + chunkSize);
@@ -80,6 +82,7 @@ function groupCommonLetter(group: group): string {
             }
     }
 }
+return ''
 }
 
 function solutionTwo(filepath:string): number {

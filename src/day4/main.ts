@@ -8,3 +8,21 @@ function readInput(filepath: string): number[][][]{
 }
 
 console.log(readInput('resources/day4/test.txt'))
+
+function contains( pairs: number[][]): number{
+    if(pairs[0][0] 
+        >= pairs[1][0] && pairs[0][1] <= pairs[1][1]){
+        return 1
+    } else if(pairs[0][0] <= pairs[1][0] && pairs[0][1] >= pairs[1][1]){
+        return 1
+    } else{
+        return 0
+    }
+}
+
+function solutionOne(filepath:string): number {
+    return readInput(filepath).map((x) => contains(x)).reduce((x,y) => x + y)
+}
+
+console.log(solutionOne('resources/day4/test.txt'))
+
