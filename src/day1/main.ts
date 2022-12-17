@@ -61,5 +61,3 @@ function solutionTwo(path: string): number{
 
 console.log(solutionTwo('resources/day1/test.txt'))
 console.log(solutionTwo('resources/day1/part1.txt'))
-
-console.log('hio')
