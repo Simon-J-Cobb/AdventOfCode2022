@@ -36,8 +36,57 @@ function letterToScore(char: string): number{
 }
 
 function solutionOne(filepath:string): number {
-    return allCommonLetters(readInput('resources/day3/test.txt')).map(letterToScore).reduce((x,y) => x + y)
+    return allCommonLetters(readInput(filepath)).map(letterToScore).reduce((x,y) => x + y)
 }
 
 console.log(solutionOne('resources/day3/test.txt'))
+console.log(solutionOne('resources/day3/input.txt'))
+
+interface group{
+    elfOne: string[]
+    elfTwo: string[]
+    elfThree: string[]
+}
+
+function readInputTwo(filepath: string): group[]{
+    let file = readFileSync(filepath,'utf-8')
+    let elves =  file.split(/\r?\n/)
+    let groups = []
+    const chunkSize = 3;
+    for (let i = 0; i < elves.length; i += chunkSize) {
+        const chunk = elves.slice(i, i + chunkSize);
+        groups.push(
+            {
+                elfOne: chunk[0],
+                elfTwo: chunk[1],
+                elfThree: chunk[2]
+            }
+        )
+    }
+    return groups
+}
+
+function groupCommonLetter(group: group): string {
+    for(let itemOne of [...group.elfOne]){
+        for(let itemTwo of [...group.elfTwo]){
+            if(itemOne==itemTwo){
+                for(let itemThree of [...group.elfThree]){
+                    if(itemThree==itemTwo){
+                        return itemThree
+                    }
+
+                }
+
+            }
+    }
+}
+}
+
+function solutionTwo(filepath:string): number {
+    return readInputTwo(filepath).map(groupCommonLetter).map(letterToScore).reduce((x,y) => x + y)
+}
+
+console.log(solutionTwo('resources/day3/test.txt'))
+console.log(solutionTwo('resources/day3/input.txt'))
+
 
