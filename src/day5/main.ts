@@ -62,3 +62,19 @@ function solutionOne(stackfilepath: string, instructionfilePath: string): string
 console.log(solutionOne('resources/day5/testStacks.txt','resources/day5/testInstructions.txt'))
 console.log(solutionOne('resources/day5/stacks.txt','resources/day5/instructions.txt'))
 
+function movePartTwo(instruction : instruction, stacks: string[][]){
+    stacks[instruction.end - 1].unshift(...stacks[instruction.start - 1].splice(0,instruction.amount))
+
+}
+
+function solutionTwo(stackfilepath: string, instructionfilePath: string): string{
+    let stacks = readStacks(stackfilepath)
+    let instructions = readInstructions(instructionfilePath)
+    instructions.map((x) => movePartTwo(x, stacks))
+    return stacks.map((x) => x[0]).reduce((x,y) => x.replace('[', '').replace(']', '') + y.replace('[', '').replace(']', ''))
+}
+
+console.log(solutionTwo('resources/day5/testStacks.txt','resources/day5/testInstructions.txt'))
+console.log(solutionTwo('resources/day5/stacks.txt','resources/day5/instructions.txt'))
+
+    
