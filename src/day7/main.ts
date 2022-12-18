@@ -87,3 +87,30 @@ console.log(constructDirectory(readInput('resources/day7/input.txt')))
 
 solutionOne(constructDirectory(readInput('resources/day7/input.txt')))
 console.log(sizesUnder100)
+
+let smallestDirectoryToDelete = 70000000
+
+function solutionTwo(directory: directory, unusedSpace: number): number {
+    let filesize = 0
+    if(directory.files.length != 0){
+    filesize += directory.files.map((x) => x.size).reduce((x,y) => x + y)}
+    for(let dir of directory.subdirectories){
+        filesize += solutionTwo(dir, unusedSpace)
+    }
+    if(filesize + unusedSpace > 30000000 && smallestDirectoryToDelete > filesize){
+        smallestDirectoryToDelete = filesize
+    }
+    return filesize
+
+}
+
+let testDirectory = constructDirectory(readInput('resources/day7/test.txt'))
+let inputDirectory = constructDirectory(readInput('resources/day7/input.txt'))
+
+solutionTwo(testDirectory,70000000 - solutionOne(testDirectory))
+console.log(smallestDirectoryToDelete)
+
+smallestDirectoryToDelete = 70000000
+
+solutionTwo(inputDirectory,70000000 - solutionOne(inputDirectory))
+console.log(smallestDirectoryToDelete)
