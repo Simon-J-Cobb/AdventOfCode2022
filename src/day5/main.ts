@@ -7,10 +7,15 @@ function readStacks(filepath: string): string[][] {
     let stacks: string[][] = Array.from(Array((rows[0].length + 1) / 4), () => [])
     for (let row of rows.slice(0, rows.length - 1)) {
         for (let i = 0; i < row.length; i += chunkSize) {
-            stacks[i / 4].push(row.slice(i, i + chunkSize).trim())
+            const newLocal = row.slice(i, i + chunkSize).trim();
+            if(newLocal == ''){
+                continue
+            }
+            stacks[i / 4].push(newLocal)
 
         }
-    } return stacks
+    } 
+    return stacks
 
 }
 
@@ -39,3 +44,19 @@ function readInstructions(filepath: string): instruction[] {
 }
 console.log(readStacks('resources/day5/testStacks.txt'))
 console.log(readInstructions('resources/day5/testInstructions.txt'))
+
+function move(instruction : instruction, stacks: string[][]){
+    Array(instruction.amount).fill([]).map(() => stacks[instruction.end -1].unshift(stacks[instruction.start - 1].shift() as string))
+    //console.log(stacks)
+    return stacks
+    
+}
+
+function solutionOne(stackfilepath: string, instructionfilePath: string): string[]{
+    let stacks = readStacks(stackfilepath)
+    let instructions = readInstructions(instructionfilePath)
+    instructions.map((x) => move(x, stacks))
+    return stacks.map((x) => x[0])
+}
+
+console.log(solutionOne('resources/day5/testStacks.txt','resources/day5/testInstructions.txt'))
