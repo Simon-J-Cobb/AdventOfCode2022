@@ -65,7 +65,8 @@ let sizesUnder100 = 0
 
 function solutionOne(directory: directory): number {
     let filesize = 0
-    filesize += directory.files.map((x) => x.size).reduce((x,y) => x + y)
+    if(directory.files.length != 0){
+    filesize += directory.files.map((x) => x.size).reduce((x,y) => x + y)}
     for(let dir of directory.subdirectories){
         filesize += solutionOne(dir)
     }
@@ -79,4 +80,10 @@ function solutionOne(directory: directory): number {
 console.log(constructDirectory(readInput('resources/day7/test.txt')))
 
 solutionOne(constructDirectory(readInput('resources/day7/test.txt')))
+console.log(sizesUnder100)
+
+sizesUnder100 = 0
+console.log(constructDirectory(readInput('resources/day7/input.txt')))
+
+solutionOne(constructDirectory(readInput('resources/day7/input.txt')))
 console.log(sizesUnder100)
