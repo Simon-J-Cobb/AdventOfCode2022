@@ -61,4 +61,22 @@ function goToParent(directory: directory): directory {
 
 }
 
+let sizesUnder100 = 0
+
+function solutionOne(directory: directory): number {
+    let filesize = 0
+    filesize += directory.files.map((x) => x.size).reduce((x,y) => x + y)
+    for(let dir of directory.subdirectories){
+        filesize += solutionOne(dir)
+    }
+    if(filesize < 100000){
+        sizesUnder100 += filesize
+    }
+    return filesize
+
+}
+
 console.log(constructDirectory(readInput('resources/day7/test.txt')))
+
+solutionOne(constructDirectory(readInput('resources/day7/test.txt')))
+console.log(sizesUnder100)
