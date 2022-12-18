@@ -52,11 +52,13 @@ function move(instruction : instruction, stacks: string[][]){
     
 }
 
-function solutionOne(stackfilepath: string, instructionfilePath: string): string[]{
+function solutionOne(stackfilepath: string, instructionfilePath: string): string{
     let stacks = readStacks(stackfilepath)
     let instructions = readInstructions(instructionfilePath)
     instructions.map((x) => move(x, stacks))
-    return stacks.map((x) => x[0])
+    return stacks.map((x) => x[0]).reduce((x,y) => x.replace('[', '').replace(']', '') + y.replace('[', '').replace(']', ''))
 }
 
 console.log(solutionOne('resources/day5/testStacks.txt','resources/day5/testInstructions.txt'))
+console.log(solutionOne('resources/day5/stacks.txt','resources/day5/instructions.txt'))
+
