@@ -86,7 +86,11 @@ function monkeyRound( monkeys : monkey[]){
 function solutionOne(filepath: string){
     const monkeys = readInput(filepath)
      Array(20).fill([]).forEach(() => monkeyRound(monkeys))
-    return monkeys.map((x) => x.inspecttimes).sort().slice(0,2).reduce((x,y) => x*y)
+    const newLocal = monkeys.map((x) => x.inspecttimes).sort((x,y) => x - y)
+    const maxes = newLocal.slice(-2)
+    console.log(newLocal)
+    return maxes.reduce((x,y) => x*y)
 }
 
 console.log(solutionOne(('resources/day11/test.txt')))
+console.log(solutionOne(('resources/day11/input.txt')))
