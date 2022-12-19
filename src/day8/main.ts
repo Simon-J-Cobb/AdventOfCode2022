@@ -95,3 +95,98 @@ function solutionOne(filepath: string){
 
 //console.log(readInput('resources/day8/test.txt'))
 console.log(solutionOne('resources/day8/test.txt'))
+console.log(solutionOne('resources/day8/input.txt'))
+
+function lookTwo(trees: tree[][], startRow: number, startColumn: number, direction: direction) {
+    let score = 0
+    if (direction == 'right') {
+            for (let j = startColumn; j < trees[0].length; j++) {
+                if (j == startColumn) {
+                    score = 0
+                } else {
+                    score += 1
+                    if (trees[startRow][startColumn].height > trees[startRow][j].height) {
+                        continue
+                    } else{
+                        return score 
+                    }
+                }
+            }
+
+        
+    } else if (direction == 'left') {
+            for (let j = startColumn; j >= 0; j--) {
+                if (j == startColumn) {
+                    score = 0
+                } else {
+                    score += 1
+                    if (trees[startRow][startColumn].height > trees[startRow][j].height) {
+                        continue
+                    } else{
+                        return score
+                    }
+                }
+
+            
+
+        }
+    } else if (direction == 'down') {
+            for (let j = startRow; j < trees.length; j++) {
+                if (j == startRow) {
+                    score = 0
+                } else {
+                    score += 1
+                    if (trees[startRow][startColumn].height > trees[j][startColumn].height) {
+                        continue
+                    } else{
+                        return score
+                    }
+                }
+            }
+
+        }
+     else if (direction == 'up') {
+            for (let j = startRow; j >= 0; j--) {
+                if (j == startRow) {
+                    score = 0
+
+                } else {
+                    score += 1
+                    if (trees[startRow][startColumn].height > trees[j][startColumn].height) {
+                        continue
+                    } else{
+                        return score
+                    }
+                }
+
+            }
+
+        }
+    
+    return score
+}
+
+function solutionTwo(filepath: string){
+    let trees = readInput(filepath)
+    let bestScore = 0
+
+    for (let i = 0; i < trees.length; i++) {
+        for (let j = 0; j < trees[0].length; j++) {
+            let score = 1
+            //console.log('tree' ,i, j)
+            for(let direction of directions){
+                score *= lookTwo(trees, i, j, direction)
+                //console.log(direction, score)
+            }
+            //console.log(score)
+            if(score > bestScore){
+                bestScore = score
+            }
+        }
+    }
+    return bestScore
+}
+
+console.log(solutionTwo('resources/day8/test.txt'))
+console.log(solutionTwo('resources/day8/input.txt'))
+
