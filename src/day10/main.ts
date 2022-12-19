@@ -119,3 +119,10 @@ for(let line of solutionTwo('resources/day10/testTwo.txt').map((x
 ) => x.join(''))){
     console.log(line)
 }
+
+console.log(' ')
+
+for(let line of solutionTwo('resources/day10/input.txt').map((x
+    ) => x.join(''))){
+        console.log(line)
+    }
