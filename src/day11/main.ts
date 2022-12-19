@@ -114,8 +114,8 @@ function solutionTwo(filepath: string){
      Array(10000).fill([]).forEach(() => monkeyRoundTwo(monkeys))
     const newLocal = monkeys.map((x) => x.inspecttimes).sort((x,y) => x - y)
     const maxes = newLocal.slice(-2)
-    console.log(newLocal)
     return maxes.reduce((x,y) => x*y)
 }
 
 console.log(solutionTwo(('resources/day11/test.txt')))
+console.log(solutionTwo(('resources/day11/input.txt')))
