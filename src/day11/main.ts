@@ -12,7 +12,8 @@ interface monkey {
     items: number[],
     operation: operation
     test: test,
-    inspecttimes: number
+    inspecttimes: number,
+    divisor: number
 }
 
 function readInput(filepath: string): monkey[] {
@@ -28,6 +29,7 @@ function readInput(filepath: string): monkey[] {
                     items: chunk[1].split(' ').map((x) => parseInt(x.replace(',',''))).filter((x) => !Number.isNaN(x)),
                     operation: operationParser(chunk[2]),
                     test: testParser(chunk.slice(3,7)),
+                    divisor: parseInt(chunk[3].split(' ')[5]),
                     inspecttimes: 0
                 }
             )
@@ -88,9 +90,32 @@ function solutionOne(filepath: string){
      Array(20).fill([]).forEach(() => monkeyRound(monkeys))
     const newLocal = monkeys.map((x) => x.inspecttimes).sort((x,y) => x - y)
     const maxes = newLocal.slice(-2)
-    console.log(newLocal)
     return maxes.reduce((x,y) => x*y)
 }
 
 console.log(solutionOne(('resources/day11/test.txt')))
 console.log(solutionOne(('resources/day11/input.txt')))
+
+function monkeyRoundTwo( monkeys : monkey[]){
+    let modulus = monkeys.map((x) => x.divisor).reduce((x,y) => x*y)
+    for(let monkey of monkeys){
+        for(let item of monkey.items){
+            item = monkey.operation(item)
+            monkey.inspecttimes += 1
+            item = item % modulus
+            monkeys[monkey.test(item)].items.push(item)
+        }
+        monkey.items = []
+    }
+}
+
+function solutionTwo(filepath: string){
+    const monkeys = readInput(filepath)
+     Array(10000).fill([]).forEach(() => monkeyRoundTwo(monkeys))
+    const newLocal = monkeys.map((x) => x.inspecttimes).sort((x,y) => x - y)
+    const maxes = newLocal.slice(-2)
+    console.log(newLocal)
+    return maxes.reduce((x,y) => x*y)
+}
+
+console.log(solutionTwo(('resources/day11/test.txt')))
