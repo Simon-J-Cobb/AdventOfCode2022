@@ -84,3 +84,4 @@ function Dijkstra(graph: node[]) {
 
 console.log(readInput('resources/day12/test.txt'))
 console.log(Dijkstra(readInput('resources/day12/test.txt')))
+console.log(Dijkstra(readInput('resources/day12/input.txt')))
