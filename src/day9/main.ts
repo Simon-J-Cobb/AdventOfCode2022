@@ -94,4 +94,6 @@ function solutionTwo(filepath:string){
 }
 console.log(solutionTwo('resources/day9/test.txt'))
 console.log(solutionTwo('resources/day9/testTwo.txt'))
+console.log(solutionTwo('resources/day9/input.txt'))
+
 
