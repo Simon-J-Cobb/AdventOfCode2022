@@ -15,7 +15,7 @@ function readInput(filepath: string): instruction[] {
 interface position {
     xcoord: number,
     ycoord: number,
-    kind: 'H' | 'T'
+    kind: 'H' | 'T' | number
 }
 
 function directionMove(position: position, direction: direction): position {
@@ -68,3 +68,30 @@ function solutionOne(filepath:string){
 }
 console.log(readInput('resources/day9/test.txt'))
 console.log(solutionOne('resources/day9/test.txt'))
+console.log(solutionOne('resources/day9/input.txt'))
+
+function longmove(positions: position[], instructions: instruction[]) {
+    let positionsVisited = new Set<string>()
+    for (let instruction of instructions) {
+        for (let i of Array(instruction.amount).fill([])) {
+            positions[0] = directionMove(positions[0], instruction.direction)
+            for(let j = 1;j < positions.length; j++){
+                positions[j] = tMove(positions[j-1],positions[j])
+            }
+            positionsVisited.add(JSON.stringify(positions[9]))
+        }
+    }
+    return positionsVisited
+}
+
+function solutionTwo(filepath:string){
+    let positions = []
+    for(let i=0;i < 10;i++){
+        positions.push({xcoord: 0, ycoord: 0, kind: i})
+
+    }
+    return longmove(positions, readInput(filepath)).size
+}
+console.log(solutionTwo('resources/day9/test.txt'))
+console.log(solutionTwo('resources/day9/testTwo.txt'))
+
