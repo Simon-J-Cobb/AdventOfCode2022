@@ -19,3 +19,8 @@ test('compare two lists', () => {
 test('compare two lists', () => {
     expect(compare({ value: [[1],[2,3,4]] }, { value: [[1],4] })).toBe(true)
 })
+
+test('compare two lists', () => {
+    expect(compare({ value: [[1],4] }, { value: [1,[2,[3,[4,[5,6,7]]]],8,9] })).toBe(true)
+})
+
