@@ -145,3 +145,5 @@ function solutionTwo(filepath: string){
 }
 
 console.log(solutionTwo('resources/day14/test.txt'))
+console.log(solutionTwo('resources/day14/input.txt'))
+
