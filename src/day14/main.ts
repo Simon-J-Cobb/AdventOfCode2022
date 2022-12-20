@@ -3,8 +3,8 @@ import { readFileSync } from "fs"
 type kind = '#' | '.' | 'o'
 
 
-function createGrid(): kind[][] {
-    return Array(10).fill([]).map(() => Array(510).fill('.'))
+function createGrid(width: number, height: number): kind[][] {
+    return Array(width + 3).fill([]).map(() => Array(height + 2).fill('.'))
 }
 
 function drawLine(start: number[], end: number[], grid: kind[][]) {
@@ -45,8 +45,16 @@ function drawAllLines(grid: kind[][], lines: number[][][] ){
 
 }
 
-function setUpGrid(filepath: string): kind[][] {
-    return drawAllLines(createGrid(), readInput(filepath))
+interface grid {
+    value: kind[][]
+    maxrow: number
+}
+
+function setUpGrid(filepath: string): grid {
+    const input = readInput(filepath)
+    let height = Math.max(...input.flat().map((x) => x[1])) 
+    let row = 1000 
+    return {value: drawAllLines(createGrid(height, row), input), maxrow: height }
 }
 
 function prettyGrid(grid: kind[][]){
@@ -55,12 +63,16 @@ function prettyGrid(grid: kind[][]){
     }
 }
 
-prettyGrid(setUpGrid('resources/day14/test.txt'))
+prettyGrid(setUpGrid('resources/day14/test.txt').value)
 
-function fallingSand(grid: kind[][]){
+function fallingSand(gridwithrow:grid){
     let row = 0
     let column = 500
+    let grid = gridwithrow.value
     while(true){
+        if(row >= gridwithrow.maxrow + 1){
+            return true
+        }
         if(grid[row + 1][column] == '.'){
             row += 1
         } else if(grid[row + 1][column - 1] == '.'){
@@ -73,9 +85,8 @@ function fallingSand(grid: kind[][]){
             grid[row][column] = 'o'
             return false
         }
-        if(row > 8){
-            return true
-        }
+
+
     }
     
 }
@@ -86,11 +97,51 @@ function solutionOne(filepath: string){
     while(!fallingSand(grid)){
         i++
     }
-    prettyGrid(grid)
-    console.log(i)
+    //prettyGrid(grid.value)
     return i
 
 }
 
 console.log(solutionOne('resources/day14/test.txt'))
+console.log(solutionOne('resources/day14/input.txt'))
 
+
+function fallingSandPartTwo(gridwithrow:grid){
+    let row = 0
+    let column = 500
+    let grid = gridwithrow.value
+    drawLine([0,gridwithrow.maxrow + 2], [999,gridwithrow.maxrow + 2], grid)
+    while(true){
+        if(grid[0][500] == 'o'){
+            return true
+        }
+        if(grid[row + 1][column] == '.'){
+            row += 1
+        } else if(grid[row + 1][column - 1] == '.'){
+            row += 1
+            column -= 1
+        } else if(grid[row + 1][column + 1] == '.'){
+            row += 1
+            column += 1
+        } else {
+            grid[row][column] = 'o'
+            return false
+        }
+
+
+    }
+    
+}
+
+function solutionTwo(filepath: string){
+    let grid = setUpGrid(filepath)
+    let i = 0
+    while(!fallingSandPartTwo(grid)){
+        i++
+    }
+    //prettyGrid(grid.value)
+    return i
+
+}
+
+console.log(solutionTwo('resources/day14/test.txt'))
