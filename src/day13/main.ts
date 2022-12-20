@@ -1,4 +1,3 @@
-import { COMPARISON_BINARY_OPERATORS } from "@babel/types";
 import { readFileSync } from "fs"
 
 interface packet {
