@@ -1,3 +1,4 @@
+import { COMPARISON_BINARY_OPERATORS } from "@babel/types";
 import { readFileSync } from "fs"
 
 interface packet {
@@ -59,4 +60,27 @@ function solutionOne(filepath:string){
 }
 
 console.log(solutionOne('resources/day13/test.txt'))
+console.log(solutionOne('resources/day13/input.txt'))
+
+function compareForSort(packetOne: packet, packetTwo: packet){
+    if(compare(packetOne,packetTwo)){
+        return -1
+    } else{
+        return 1
+    }
+}
+
+function solutionTwo(filepath:string){
+    let packets = readInput(filepath)
+    let listOfPackets = packets.flat()
+    const dividorOne = { value: [[2]] };
+    const dividorTwo = { value: [[6]] };
+    listOfPackets.push(dividorOne, dividorTwo)
+    listOfPackets.sort((a,b) => compareForSort(a,b))
+    return (listOfPackets .indexOf(dividorOne) + 1) * (listOfPackets.indexOf(dividorTwo) + 1)
+}
+
+console.log(solutionTwo('resources/day13/test.txt'))
+
+
 
