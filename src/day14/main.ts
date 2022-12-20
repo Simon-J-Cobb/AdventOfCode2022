@@ -57,4 +57,40 @@ function prettyGrid(grid: kind[][]){
 
 prettyGrid(setUpGrid('resources/day14/test.txt'))
 
+function fallingSand(grid: kind[][]){
+    let row = 0
+    let column = 500
+    while(true){
+        if(grid[row + 1][column] == '.'){
+            row += 1
+        } else if(grid[row + 1][column - 1] == '.'){
+            row += 1
+            column -= 1
+        } else if(grid[row + 1][column + 1] == '.'){
+            row += 1
+            column += 1
+        } else {
+            grid[row][column] = 'o'
+            return false
+        }
+        if(row > 8){
+            return true
+        }
+    }
+    
+}
+
+function solutionOne(filepath: string){
+    let grid = setUpGrid(filepath)
+    let i = 0
+    while(!fallingSand(grid)){
+        i++
+    }
+    prettyGrid(grid)
+    console.log(i)
+    return i
+
+}
+
+console.log(solutionOne('resources/day14/test.txt'))
 
