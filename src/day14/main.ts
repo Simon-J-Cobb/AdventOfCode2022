@@ -57,13 +57,15 @@ function setUpGrid(filepath: string): grid {
     return {value: drawAllLines(createGrid(height, row), input), maxrow: height }
 }
 
-function prettyGrid(grid: kind[][]){
-    for(let row of grid){
-        console.log(row.join(''))
+
+function prettyGrid(grid: grid){
+    console.clear()
+    for(let row of grid.value.slice(0,30)){
+        console.log(row.slice(400,505).join(''))
     }
 }
 
-prettyGrid(setUpGrid('resources/day14/test.txt').value)
+prettyGrid(setUpGrid('resources/day14/test.txt'))
 
 function fallingSand(gridwithrow:grid){
     let row = 0
@@ -91,13 +93,22 @@ function fallingSand(gridwithrow:grid){
     
 }
 
+function sleep(ms: number) {
+    var start = Date.now(),
+        now = start;
+    while (now - start < ms) {
+      now = Date.now();
+    }
+}
+
 function solutionOne(filepath: string){
     let grid = setUpGrid(filepath)
     let i = 0
     while(!fallingSand(grid)){
         i++
+        sleep(500);
+        prettyGrid(grid)
     }
-    //prettyGrid(grid.value)
     return i
 
 }
